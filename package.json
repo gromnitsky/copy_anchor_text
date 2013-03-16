@@ -1,6 +1,8 @@
 {
 	"files": [
+		"icons/128.png",
 		"lib/background.js",
+		"lib/background.html",
 		"lib/content_script.js",
 		"manifest.json"
 	],

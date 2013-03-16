@@ -21,7 +21,7 @@ compile: node_modules manifest.json
 include chrome.mk
 
 compile_clean:
-	$(MAKE) -C src clean
+#	$(MAKE) -C src clean
 
 node_modules: package.json
 	npm install
@@ -34,7 +34,7 @@ manifest_clean:
 	rm -f manifest.json
 
 clean: manifest_clean compile_clean chrome_clean
-	rmdir lib
+#	rmdir lib
 
 clobber: clean
 	rm -rf node_modules
