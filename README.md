@@ -2,8 +2,18 @@
 
 Chrome 50+ extension.
 
-Adds an item to the context menu named 'Copy Anchor Text' for copying
-a link name. Unlike other similar extensions this one actually works.
+Adds an item to the context menu named '֎' for copying a link
+name. Unlike other similar extensions this one actually works.
+
+# News
+
+**0.0.2**
+
+- Reduce the memory usage by switching to an 'Event Page', instead of
+  a persistent bg page.
+- Replace an ugly 'Copy Anchor Text' w/ a left-facing Armenian
+  eternity sign (for the symbol looks rather cool).
+
 
 ## Build requirements
 
@@ -11,7 +21,7 @@ a link name. Unlike other similar extensions this one actually works.
 * `npm -g i json`.
 * xxd util
 
-## Making a custom crx
+## Compiling
 
 1. Generate a private RSA key:
 
