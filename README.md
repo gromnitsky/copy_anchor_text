@@ -1,41 +1,32 @@
 # Copy Anchor Text
 
-Chrome 25+ extension.
+Chrome 50+ extension.
 
-Adds an item to right click menu named 'Copy Anchor Text' to copy link
-name. Unlike other similar extensions this one actually works.
+Adds an item to the context menu named 'Copy Anchor Text' for copying
+a link name. Unlike other similar extensions this one actually works.
 
-## BUGS
+## Build requirements
 
-* `contextmenu` won't fire on page with html frames.
-* On some Google+ elements the respond to a message from a background
+* GNU make
+* `npm -g i json`.
+* xxd util
+
+## Making a custom crx
+
+1. Generate a private RSA key:
+
+	`$ openssl genrsa -out private.pem 1024`
+
+2. To generate a .crx, type `make` & you should get
+   `_build/copy_anchor_text-x.y.z.crx`.
+
+
+## Bugs
+
+* `contextmenu` event won't fire on a page with html frames.
+* On some Google+ elements, the respond to a message from a background
   page vanishes.
 
-## Build requirements:
-
-* jsontool in global mode.
-* GNU m4
-* xxd utility.
-* GNU make.
-
-## Compilation
-
-To compile, run
-
-    $ make compile
-
-To make a .crx file, you'll need a private RSA key named `private.pem`
-in the same directory where Makefile is. For testing purposes, generate
-it with openssl:
-
-    $ openssl genrsa -out private.pem 1024
-
-and run:
-
-    $ make crx
-
-If everything was fine, `copy_anchor_text-x.y.z.crx` file will
-appear.
 
 ## License
 

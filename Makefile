@@ -1,45 +1,26 @@
-M4 := m4
-JSON := json
-MOCHA := node_modules/.bin/mocha
+.DELETE_ON_ERROR:
 
-METADATA := package.json
-PKG := $(shell $(JSON) -a -d- name version < $(METADATA))
-PKG_FILES := $(shell $(JSON) files < $(METADATA) | $(JSON) -a)
+out := _build
+pkg.name := $(shell json -e 'this.q = this.name + "-" + this.version' q < lib/manifest.json)
 
-OPTS :=
+mkdir = @mkdir -p $(dir $@)
+src := $(shell find lib -type f)
 
-.PHONY: clobber clean manifest_clean compile_clean
+# crx generation
 
-all: test
+.PHONY: crx
+crx: $(out)/$(pkg.name).crx
 
-test: compile
-	$(MOCHA) test $(OPTS)
+$(out)/$(pkg.name).zip: $(src)
+	$(mkdir)
+	cd $(dir $<) && zip -qr $(CURDIR)/$@ *
 
-compile: node_modules manifest.json
-#	$(MAKE) -C src compile
+%.crx: %.zip private.pem
+	./zip2crx.sh $< private.pem
 
-include chrome.mk
 
-compile_clean:
-#	$(MAKE) -C src clean
+# sf
 
-node_modules: package.json
-	npm install
-	touch $@
-
-manifest.json: manifest.m4
-	$(M4) $< > $@
-
-manifest_clean:
-	rm -f manifest.json
-
-clean: manifest_clean compile_clean chrome_clean
-#	rmdir lib
-
-clobber: clean
-	rm -rf node_modules
-
-# Debug. Use 'gmake p-obj' to print $(obj) variable.
-p-%:
-	@echo $* = $($*)
-	@echo $*\'s origin is $(origin $*)
+.PHONY: upload
+upload:
+	scp $(out)/$(pkg.name).crx gromnitsky@web.sourceforge.net:/home/user-web/gromnitsky/htdocs/js/chrome/

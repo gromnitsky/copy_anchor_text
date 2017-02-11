@@ -1,22 +1,7 @@
 {
-	"files": [
-		"icons/128.png",
-		"lib/background.js",
-		"lib/background.html",
-		"lib/content_script.js",
-		"manifest.json"
-	],
-	"name": "copy_anchor_text",
-	"version": "0.0.1",
-	"license": {
-		"type": "MIT",
-		"url": "http://www.opensource.org/licenses/mit-license.php"
-	},
-	"repository": {
-		"type": "git",
-		"url": "http://github.com/gromnitsky/copy_anchor_text"
-	},
-	"dependencies": {
-		"mocha": "~1.8.2"
-	}
+    "name": "copy_anchor_text",
+    "private": true,
+    "version": "0.0.1-see-src-manifest.json",
+    "author": "Alexander Gromnitsky",
+    "license": "MIT"
 }
