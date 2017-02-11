@@ -11,7 +11,8 @@
 	"clipboardWrite"
     ],
     "background": {
-	"page": "background.html"
+	"persistent": false,
+	"scripts": ["event_page.js"]
     },
     "content_scripts": [{
 	"matches": ["<all_urls>"],
