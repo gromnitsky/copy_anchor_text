@@ -1,10 +1,10 @@
 .DELETE_ON_ERROR:
 
 out := _build
-pkg.name := $(shell json -e 'this.q = this.name + "-" + this.version' q < lib/manifest.json)
+pkg.name := $(shell json -e 'this.q = this.name + "-" + this.version' q < src/manifest.json)
 
 mkdir = @mkdir -p $(dir $@)
-src := $(shell find lib -type f)
+src := $(shell find src -type f)
 
 # crx generation
 
