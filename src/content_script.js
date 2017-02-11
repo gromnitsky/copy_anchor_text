@@ -1,16 +1,15 @@
-/*global chrome:true */
+/* global chrome */
 
-var MyAnchor = null				// lame approach
+let MyAnchor = null
 
-// listen to a message from background.js
+// listen to a message from event_page.js
 chrome.extension.onMessage.addListener(function(req, sender, sendRes) {
-	if (req !== "menuClick")
-		throw new Error('invalid message from background.js: ' + req)
+    if (req !== "menuClick")
+	throw new Error('invalid message from event_page.js: ' + req)
 
-	console.log('copy_anchor_text: menuClick: ' + MyAnchor)
-	sendRes(MyAnchor)
+    sendRes(MyAnchor)
 })
 
 document.addEventListener('contextmenu', function(event) {
-	MyAnchor = event.target.innerText
+    MyAnchor = event.target.innerText
 }, true)
