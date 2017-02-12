@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "copy_anchor_text",
-    "version": "0.0.2",
-    "description": "Adds an item to the context menu for copying a link name",
+    "version": "0.1.0",
+    "description": "Adds an item to the context menu for copying a link anchor text or the value of title/alt attributes for an image.",
     "icons": {
 	"128": "icons/128.png"
     },
