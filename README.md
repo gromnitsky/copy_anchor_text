@@ -1,8 +1,9 @@
 # Copy Anchor Text
 
-A Chrome 50+ extension.
+A Chrome 73+ extension.
 
-(Download the compiled extension [here](http://gromnitsky.users.sourceforge.net/js/chrome/).)
+(Download the .crx file
+[here](http://gromnitsky.users.sourceforge.net/js/chrome/).)
 
 Adds an item to the context menu (arbitrary drawn as '֎') for copying
 a link anchor text or the value of title/alt attributes for an image.
@@ -17,22 +18,11 @@ Unlike other similar extensions this one actually works.
   a persistent bg page.
 - Add img support.
 
+## Compilation
 
-## Build requirements
+    $ make crx
 
-* GNU make
-* `npm -g i json`.
-* xxd util
-
-## Compiling
-
-1. Generate a private RSA key:
-
-	`$ openssl genrsa -out private.pem 1024`
-
-2. To generate a .crx, type `make`; you should get
-   `_build/copy_anchor_text-x.y.z.crx`.
-
+The result should be in `_out` dir.
 
 ## License
 
