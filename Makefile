@@ -1,26 +1,21 @@
-.DELETE_ON_ERROR:
-
-out := _build
-pkg.name := $(shell json -e 'this.q = this.name + "-" + this.version' q < src/manifest.json)
-
-mkdir = @mkdir -p $(dir $@)
+out := _out
 src := $(shell find src -type f)
+pkg := $(out)/$(shell json -d- -a name version < src/manifest.json)
+crx := $(pkg).crx
+zip := $(pkg).zip
 
-# crx generation
+crx: $(crx)
+$(crx): private.pem $(src)
+	google-chrome --pack-extension=src --pack-extension-key=$<
+	@mkdir -p $(dir $@)
+	mv src.crx $@
 
-.PHONY: crx
-crx: $(out)/$(pkg.name).crx
-
-$(out)/$(pkg.name).zip: $(src)
-	$(mkdir)
+zip: $(zip)
+$(zip): $(src)
 	cd $(dir $<) && zip -qr $(CURDIR)/$@ *
 
-%.crx: %.zip private.pem
-	./zip2crx.sh $< private.pem
+private.pem:
+	openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out $@
 
-
-# sf
-
-.PHONY: upload
-upload:
-	scp $(out)/$(pkg.name).crx gromnitsky@web.sourceforge.net:/home/user-web/gromnitsky/htdocs/js/chrome/
+upload: $(crx)
+	scp $< gromnitsky@web.sourceforge.net:/home/user-web/gromnitsky/htdocs/js/chrome/
