@@ -24,6 +24,21 @@ Unlike other similar extensions this one actually works.
 
 The result should be in `_out` dir.
 
+## Implementation notes
+
+Why doesn't it use the celebrated `activeTab` permission (+
+ `chrome.tabs.executeScript()`) instead of `<all_urls>`?
+
+The only way to get hold of a DOM node for which the `contextmenu`
+event was fired is to register an event handler first (on a parent of
+the node). This is what the extension does via injecting its content
+script into all the web pages.
+
+But if we do `executeScript()` on demand, than the `contextmenu` event
+doesn't fire in the injected script *iff* `executeScript()` runs for
+the 1st time, for the `contextmenu` event happens before the
+injection, hence the injected script doesn't see it.
+
 ## License
 
 MIT.
