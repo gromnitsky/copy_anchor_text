@@ -6,7 +6,8 @@ function clipboard_write(s) {
 }
 
 chrome.runtime.onMessage.addListener( req => {
-    if (req.target !== 'offscreen.html') return
-    req.err ? alert(req.err) : clipboard_write(req.text)
+    if (req.target === 'offscreen.html') {
+        req.err ? alert(req.err) : clipboard_write(req.text)
+    }
     window.close()
 })
