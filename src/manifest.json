@@ -1,21 +1,22 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "copy_anchor_text",
-    "version": "0.1.0",
-    "description": "Adds an item to the context menu for copying a link anchor text or the value of title/alt attributes for an image.",
+    "version": "1.0.0",
+    "description": "Copy link text or image title/alt via a context menu.",
     "icons": {
-	"128": "icons/128.png"
+        "128": "icons/128.png"
     },
     "permissions": [
-	"contextMenus",
-	"clipboardWrite"
+        "contextMenus",
+        "clipboardWrite",
+        "offscreen"
     ],
     "background": {
-	"persistent": false,
-	"scripts": ["event_page.js"]
+        "service_worker": "service_worker.js",
+        "type": "module"
     },
     "content_scripts": [{
-	"matches": ["<all_urls>"],
-	"js": ["content_script.js"]
+        "matches": ["<all_urls>"],
+        "js": ["content_script.js"]
     }]
 }

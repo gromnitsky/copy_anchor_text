@@ -1,22 +1,10 @@
 # Copy Anchor Text
 
-A Chrome 73+ extension.
+A browser extension (manifest v3) to copy link text or image title/alt
+via a context menu. Unlike other similar junk this one actually works.
 
-(Download the .crx file
-[here](http://gromnitsky.users.sourceforge.net/js/chrome/).)
-
-Adds an item to the context menu (arbitrary drawn as '֎') for copying
-a link anchor text or the value of title/alt attributes for an image.
-
-Unlike other similar extensions this one actually works.
-
-# News
-
-**0.1.0**
-
-- Reduce the memory usage by switching to an 'Event Page', instead of
-  a persistent bg page.
-- Add img support.
+* [Chrome Web Store](https://chromewebstore.google.com/detail/copyanchortext/ejchelcnfibgbamkmkcobhbiiobglpgk)
+* [.crx file](http://gromnitsky.users.sourceforge.net/js/chrome/)
 
 ## Compilation
 
@@ -24,15 +12,15 @@ Unlike other similar extensions this one actually works.
 
 The result should be in `_out` dir.
 
-## Implementation notes
+## Implementation notes from 2017
 
 Why doesn't it use the celebrated `activeTab` permission (+
  `chrome.tabs.executeScript()`) instead of `<all_urls>`?
 
-The only way to get hold of a DOM node for which the `contextmenu`
-event was fired is to register an event handler first (on a parent of
-the node). This is what the extension does via injecting its content
-script into all the web pages.
+The only way to access a DOM node for which `contextmenu` event was
+fired is by first registering an event handler (on a parent of the
+node). This is what the extension accomplishes by injecting its
+content script into all web pages.
 
 But if we do `executeScript()` on demand, than the `contextmenu` event
 doesn't fire in the injected script *iff* `executeScript()` runs for
