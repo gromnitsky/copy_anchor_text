@@ -5,9 +5,14 @@ function clipboard_write(s) {
     document.execCommand('copy')
 }
 
+function error(msg) {
+    document.querySelector('#error').innerText = msg
+}
+
 chrome.runtime.onMessage.addListener( req => {
-    if (req.target === 'offscreen.html') {
-        req.err ? alert(req.err) : clipboard_write(req.text)
-    }
+    if (req.err) return error(req.err)
+    clipboard_write(req.text)
     window.close()
 })
+
+document.querySelector('html').onclick = () => window.close()

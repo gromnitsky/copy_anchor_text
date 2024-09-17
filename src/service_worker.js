@@ -1,18 +1,15 @@
-function send_message(err, text) {
-    chrome.runtime.sendMessage({ target: 'offscreen.html', err, text })
+async function send_message_to_popup(err, text) {
+    await chrome.action.openPopup()
+    chrome.runtime.sendMessage({err, text})
 }
 
-async function click(info, tab) {
-    await chrome.offscreen.createDocument({
-        url: chrome.runtime.getURL('offscreen.html'),
-        reasons: ['CLIPBOARD'],
-        justification: 'Write text to the clipboard',
-    })
+function error(msg) {
+    send_message_to_popup(`Failed to extract the text:\n\n${msg}`)
+}
 
-    let error = msg => send_message("Failed to extract the text:\n\n" + msg)
-
-    // send a message to content_script.js
-    chrome.tabs.sendMessage(tab.id, "menuClick", function menuClick(res) {
+function click(_, tab) {
+    // to content_script.js
+    chrome.tabs.sendMessage(tab.id, "contextMenus", res => {
         if (chrome.runtime.lastError) {
             return error(chrome.runtime.lastError.message
                          + "\n\nReload the page & retry.")
@@ -24,8 +21,8 @@ async function click(info, tab) {
             return error('No useful data in the attributes.')
         }
 
-        console.log(res.text.length, `${res.text.slice(0, 9)}…`)
-        send_message(null, res.text)
+        // ask to copy
+        send_message_to_popup(null, res.text)
     })
 }
 

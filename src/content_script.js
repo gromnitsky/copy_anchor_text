@@ -1,18 +1,19 @@
 let CapturedData = null
 
-// listen to a message from service_worker.js
-chrome.runtime.onMessage.addListener(function(req, sender, sendRes) {
-    if (req !== "menuClick")
-	throw new Error('invalid message from service_worker.js: ' + req)
+function messages_from_service_worker(req, sender, res) {
+    if (req !== "contextMenus")
+        throw new Error('invalid message from service_worker.js: ' + req)
 
     if (CapturedData === null) {
-	sendRes({ err: "Contextmenu event didn't fire, blame the web page!" })
-	return
+        res({ err: "Contextmenu event didn't fire, blame the web page!" })
+        return
     }
 
-    sendRes({ text: CapturedData })
+    res({ text: CapturedData })
     CapturedData = null
-})
+}
+
+chrome.runtime.onMessage.addListener(messages_from_service_worker)
 
 document.addEventListener('contextmenu', function(event) {
     let n = event.target

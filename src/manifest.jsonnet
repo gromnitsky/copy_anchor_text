@@ -9,12 +9,16 @@ function(browser="chrome") {
   "permissions": [
     "contextMenus",
     "clipboardWrite",
-    if browser != "firefox" then "offscreen"
+    "activeTab",
   ],
   "background": if browser == "firefox" then {
-    "scripts": ["firefox.background.js"]
+    "scripts": ["service_worker.js"]
   } else {
     "service_worker": "service_worker.js",
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/128.png"
   },
   "content_scripts": [{
     "matches": ["<all_urls>"],
