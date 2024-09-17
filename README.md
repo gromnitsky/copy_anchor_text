@@ -8,6 +8,7 @@ via a context menu. Unlike other similar junk this one actually works.
 
 ## Compilation
 
+    $ sudo dnf install jq jsonnet
     $ make crx
 
 The result should be in `_out` dir.
