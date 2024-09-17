@@ -13,21 +13,6 @@ via a context menu. Unlike other similar junk this one actually works.
 
 The result should be in `_out` dir.
 
-## Implementation notes from 2017
-
-Why doesn't it use the celebrated `activeTab` permission (+
- `chrome.tabs.executeScript()`) instead of `<all_urls>`?
-
-The only way to access a DOM node for which `contextmenu` event was
-fired is by first registering an event handler (on a parent of the
-node). This is what the extension accomplishes by injecting its
-content script into all web pages.
-
-But if we do `executeScript()` on demand, than the `contextmenu` event
-doesn't fire in the injected script *iff* `executeScript()` runs for
-the 1st time, for the `contextmenu` event happens before the
-injection, hence the injected script doesn't see it.
-
 ## License
 
 MIT.
