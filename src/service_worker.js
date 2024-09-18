@@ -16,14 +16,12 @@ function validate_url(str) {
     } catch (_) {
         return false
     }
-    let protocols = [
-        'chrome:',
-        'about:',
-    ]
+    let protocols = ['chrome:', 'about:', 'edge:']
     if (protocols.indexOf(url.protocol) !== -1) return false
     return [
         'chromewebstore.google.com',
         'addons.mozilla.org',
+        'microsoftedge.microsoft.com',
     ].indexOf(url.hostname) === -1
 }
 
@@ -37,7 +35,7 @@ async function click(info, tab) {
         if (is_firefox()) await sleep(100) // oh my days
 
         if (!validate_url(info.frameUrl || info.pageUrl)) {
-            return error('Certain pages are protected from browser extension.')
+            return error('Certain pages are protected from browser extensions.')
         }
 
         if (chrome.runtime.lastError) {
