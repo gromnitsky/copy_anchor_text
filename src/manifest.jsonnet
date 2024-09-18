@@ -16,6 +16,12 @@ function(browser="chrome") {
   } else {
     "service_worker": "service_worker.js",
   },
+  [if browser == "firefox" then "browser_specific_settings"]: {
+    "gecko": {
+      "id": "{4affb97e-d37f-4222-8dda-0ae3301ca039}",
+      "strict_min_version": "130.0"
+    }
+  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icons/128.png"
