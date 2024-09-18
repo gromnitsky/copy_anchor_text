@@ -6,7 +6,8 @@ function clipboard_write(s) {
 }
 
 function error(msg) {
-    document.querySelector('#error').innerText = msg
+    document.querySelector('#error-icon').innerText = '😢'
+    document.querySelector('#error-msg').innerText = msg
 }
 
 chrome.runtime.onMessage.addListener( req => {

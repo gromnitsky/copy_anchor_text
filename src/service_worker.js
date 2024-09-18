@@ -9,13 +9,37 @@ function error(msg) {
     send_message_to_popup(`Failed to extract the text:\n\n${msg}`)
 }
 
-async function click(_, tab) {
+function validate_url(str) {
+    let url
+    try {
+        url = new URL(str)
+    } catch (_) {
+        return false
+    }
+    let protocols = [
+        'chrome:',
+        'about:',
+    ]
+    if (protocols.indexOf(url.protocol) !== -1) return false
+    return [
+        'chromewebstore.google.com',
+        'addons.mozilla.org',
+    ].indexOf(url.hostname) === -1
+}
+
+async function click(info, tab) {
     // if you move this call to send_message_to_popup(), Firefox will
     // complain 'openPopup requires a user gesture'
     await chrome.action.openPopup()
 
     // to content_script.js
     chrome.tabs.sendMessage(tab.id, "contextMenus", async res => {
+        if (is_firefox()) await sleep(100) // oh my days
+
+        if (!validate_url(info.frameUrl || info.pageUrl)) {
+            return error('Certain pages are protected from browser extension.')
+        }
+
         if (chrome.runtime.lastError) {
             return error(chrome.runtime.lastError.message
                          + "\n\nReload the page & retry.")
@@ -27,7 +51,6 @@ async function click(_, tab) {
             return error('No useful data in the attributes.')
         }
 
-        if (is_firefox()) await sleep(100) // oh my days
         // ask to copy
         send_message_to_popup(null, res.text)
     })

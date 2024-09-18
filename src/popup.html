@@ -7,6 +7,15 @@
     font-size: 16px;
     width: 20em;
   }
+  div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+  }
+  #error-icon {
+    font-size: 300%;
+  }
   /*
     hide it from the viewport; with just `display: none` copying to
     clipboard fails
@@ -19,17 +28,11 @@
     left: 0px;
     transform: translateX(-50px)
   }
-  div {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 1rem;
-  }
 </style>
 
 <div>
-  <div style="color: red; font-size: 300%">⚠</div>
-  <div id="error">Move Along, Nothing to See Here</div>
+  <div id="error-icon">💅</div>
+  <div id="error-msg">Move along, nothing to see here</div>
 </div>
 <textarea></textarea>
 
