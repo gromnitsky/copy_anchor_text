@@ -9,7 +9,6 @@ function(browser="chrome") {
   "permissions": [
     "contextMenus",
     "clipboardWrite",
-    "activeTab",
   ],
   "background": if browser == "firefox" then {
     "scripts": ["service_worker.js"]
