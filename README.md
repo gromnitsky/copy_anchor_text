@@ -1,10 +1,21 @@
 # Copy Anchor Text
 
 A browser extension (manifest v3) to copy link text or image title/alt
-via a context menu. Unlike other similar junk this one actually works.
+via a context menu. Unlike other similar junk, this one actually
+works, & reports errors via a popup.
 
 * [Chrome Web Store](https://chromewebstore.google.com/detail/copyanchortext/ejchelcnfibgbamkmkcobhbiiobglpgk)
+* [Firefox Addons](https://addons.mozilla.org/en-US/firefox/addon/copy_anchor_text/)
 * [.crx file](http://gromnitsky.users.sourceforge.net/js/chrome/)
+
+The scary 'Access your data for all websites' permission means it
+injects a `contextmenu` listener to be able to grab text from `<a>` &
+`<img>`.
+
+## Firefox notes
+
+If you hold down <kbd>Shift</kbd> key while right-clicking, then
+`contextmenu` doesn't fire & the extension complains.
 
 ## Compilation
 
