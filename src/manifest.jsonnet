@@ -1,7 +1,7 @@
 function(browser="chrome") {
   "manifest_version": 3,
   "name": "copy_anchor_text",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Copy link text or image title/alt via a context menu.",
   "icons": {
     "128": "icons/128.png"

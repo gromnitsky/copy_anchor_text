@@ -1,5 +1,4 @@
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)) }
-function is_firefox() { return navigator.userAgent.indexOf('Firefox') !== -1 }
 
 function send_message_to_popup(err, text) {
     chrome.runtime.sendMessage({err, text})
@@ -32,7 +31,7 @@ async function click(info, tab) {
 
     // to content_script.js
     chrome.tabs.sendMessage(tab.id, "contextMenus", async res => {
-        if (is_firefox()) await sleep(100) // oh my days
+        await sleep(100) // oh my days
 
         if (!validate_url(info.frameUrl || info.pageUrl)) {
             return error('Certain pages are protected from browser extensions.')
