@@ -6,7 +6,7 @@ works, & reports errors via a popup.
 
 * [Chrome Web Store](https://chromewebstore.google.com/detail/copyanchortext/ejchelcnfibgbamkmkcobhbiiobglpgk)
 * [Firefox Addons](https://addons.mozilla.org/en-US/firefox/addon/copy_anchor_text/)
-* [.crx file](http://gromnitsky.users.sourceforge.net/js/chrome/)
+* [.crx file](https://sigwait.org/~alex/demo/chrome/)
 
 The scary 'Access your data for all websites' permission means it
 injects a `contextmenu` listener to be able to grab text from `<a>` &
